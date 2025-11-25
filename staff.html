@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Apply | W3eklyMC</title>
+  <title>Staff | UncrustedBananas SMP</title>
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 2em;
-      background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+      background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.85)),
                   url('server-icon.jpg') center center / cover no-repeat;
       font-family: 'Minecraftia', sans-serif;
       color: white;
@@ -17,103 +17,199 @@
       flex-direction: column;
       align-items: center;
     }
-    h1 { margin-bottom: 0.5em; }
-    .page-nav { display: flex; justify-content: center; gap: 1.5em; margin-bottom: 2em; flex-wrap: wrap; }
-    .page-nav a { background: #aa0000; color: white; padding: 0.6em 2.5em; border: 2px solid black; text-decoration: none; font-family: 'Minecraftia', sans-serif; font-size: 0.9em; box-shadow: inset -2px -3px #0006, inset 2px 2px #fff3; transition: background 0.3s, transform 0.2s; min-width: 140px; text-align: center; }
-    .page-nav a:hover { background: #cc0000; transform: scale(1.05); }
-    .page-nav a.active { background: #880000; border-color: #000; }
-    form { background: rgba(0,0,0,0.65); border: 2px solid #222; padding: 2em; width: 100%; max-width: 500px; box-shadow: 0 0 20px #000; display: flex; flex-direction: column; gap: 1.2em; }
-    label { font-size: 0.85em; }
-    input, textarea, select { width: 100%; background: #222; color: white; font-family: 'Minecraftia', sans-serif; border: 2px solid #000; padding: 0.5em; font-size: 0.8em; box-shadow: inset -1px -2px #0005, inset 1px 1px #fff2; resize: vertical; }
-    textarea { min-height: 100px; }
-    button { background: #ffa500; color: white; font-family: 'Minecraftia', sans-serif; font-size: 1em; padding: 0.6em 1.2em; border: 2px solid black; cursor: pointer; box-shadow: inset -2px -3px #0006, inset 2px 2px #fff3; transition: background 0.3s, transform 0.2s; align-self: center; margin-top: 1em; }
-    button:hover { background: #cc0000; transform: scale(1.05); }
-    .footer { margin-top: 2em; font-size: 0.8em; text-align: center; color: #aaa; }
+
+    h1 {
+      margin-bottom: 0.5em;
+    }
+
+    .page-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      margin-bottom: 2em;
+      flex-wrap: wrap;
+    }
+
+    .page-nav a {
+  background: #aa0000;
+  color: white;
+  padding: 0.6em 2.5em;
+  border: 2px solid black;
+  text-decoration: none;
+  font-family: 'Minecraftia', sans-serif;
+  font-size: 0.9em;
+  box-shadow: inset -2px -3px #0006, inset 2px 2px #fff3;
+  transition: background 0.3s, transform 0.2s;
+  min-width: 140px;
+  text-align: center;
+}
+
+.page-nav a:hover {
+  background: #cc0000;
+  transform: scale(1.05);
+}
+
+.page-nav a.active {
+  background: #880000;
+  border-color: #000;
+}
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      margin-bottom: 2em;
+      flex-wrap: wrap;
+    }
+
+    .nav-buttons button {
+      background: #333;
+      color: white;
+      font-family: 'Minecraftia', sans-serif;
+      font-size: 0.9em;
+      border: 2px solid #000;
+      padding: 0.6em 1em;
+      cursor: pointer;
+      box-shadow: inset -2px -3px #0006, inset 2px 2px #fff3;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .nav-buttons button:hover {
+      background: #555;
+      transform: scale(1.05);
+    }
+
+    .staff-container {
+      width: 90%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    .staff-button {
+      background: #aa0000;
+      color: white;
+      border: 2px solid black;
+      padding: 1em;
+      font-size: 1.2em;
+      cursor: pointer;
+      box-shadow: inset -2px -4px #0006, inset 2px 2px #fff7;
+      transition: background 0.3s;
+      text-align: center;
+    }
+
+    .staff-button:hover {
+      background: #cc0000;
+    }
+
+    .dropdown {
+      background: #111;
+      border: 2px solid #333;
+      margin-top: -1px;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 1.5em 1em;
+      text-align: center;
+    }
+
+    .dropdown.active {
+      display: flex;
+    }
+
+    .profile-pic {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      margin-bottom: 1em;
+      border: 3px solid #fff;
+      background-color: #222;
+    }
+
+    .staff-info {
+      font-size: 0.95em;
+      line-height: 1.5em;
+      max-width: 400px;
+    }
+    .footer {
+  margin-top: 2em;
+  font-size: 0.8em;
+  text-align: center;
+  color: #aaa;
+}
   </style>
 </head>
 <body>
 
-<h1>Apply for Staff</h1>
+  <h1>Staff Team</h1>
 
-<div class="page-nav">
-  <a href="mainpage.html">Home</a>
-  <a href="media.html">Media</a>
-  <a href="staff.html">Staff</a>
-  <a href="https://discord.gg/pMEfp5gQb2" target="_blank">Join</a>
-  <a href="vote.html">Vote</a>
-</div>
+  <!-- Page navigation bar -->
+  <div class="page-nav">
+    <a href="mainpage.html">Home</a>
+    <a href="media.html">Media</a>
+    <a href="apply.html">Apply</a>
+    <a href="https://discord.gg/pMEfp5gQb2" target="_blank">Join</a>
+    <a href="vote.html">Vote</a>
+  </div>
 
-<form id="staffForm">
-  <label for="username">Minecraft Username:</label>
-  <input type="text" id="username" name="username" required>
+  <!-- Staff role buttons -->
+  <div class="staff-container">
+    <div>
+      <div class="staff-button" onclick="toggleDropdown('owner')">Owner</div>
+      <div class="dropdown" id="owner">
+        <img src="https://minotar.net/helm/faith_over_fearr/96.png" class="profile-pic" alt="Owner Head">
+        <div class="staff-info">
+          <strong>faith_over_fearr</strong><br>
+          Server owner and founder. Maintains the server vision and community.
+        </div>
+      </div>
+    </div>
 
-  <label for="age">Age:</label>
-  <input type="number" id="age" name="age" min="13" required>
+    <div>
+      <div class="staff-button" onclick="toggleDropdown('coowner')">Co-Owner</div>
+      <div class="dropdown" id="coowner">
+        <img src="https://minotar.net/helm/LandBroPlayz/96.png" class="profile-pic" alt="Co-Owner Head">
+        <div class="staff-info">
+          <strong>LandBroPlayz</strong><br>
+          Helps manage events and server maintenance. Right hand of the Owner.
+        </div>
+      </div>
+    </div>
 
-  <label for="timezone">Timezone:</label>
-  <input type="text" id="timezone" name="timezone" placeholder="e.g., EST, GMT+1" required>
+    <div>
+      <div class="staff-button" onclick="toggleDropdown('manager')">Manager</div>
+      <div class="dropdown" id="manager">
+        <img src="https://minotar.net/helm/pastreez/96.png" class="profile-pic" alt="Manager Head">
+        <div class="staff-info">
+          <strong>pastreez</strong><br>
+          Manages players, resolves conflicts, and moderates chat/gameplay.
+        </div>
 
-  <label for="position">Position applying for:</label>
-  <select id="position" name="position" required>
-    <option value="">-- Select a role --</option>
-    <option value="builder">Builder</option>
-    <option value="helper">Helper</option>
-  </select>
+        <!-- NEW MANAGER -->
+        <img src="https://minotar.net/helm/FlashKat1/96.png" class="profile-pic" alt="Another Manager Head">
+        <div class="staff-info">
+          <strong>FlashKat1</strong><br>
+          Additional manager responsible for community engagement and support.
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <label for="why">Why do you want to join the staff team?</label>
-  <textarea id="why" name="why" required></textarea>
-
-  <label for="experience">Relevant experience (optional):</label>
-  <textarea id="experience" name="experience"></textarea>
-
-  <button type="submit">Submit Application</button>
-  <p id="status" style="text-align:center;"></p>
-</form>
-
-<div class="footer">
-  &copy; 2025 W3eklyMC. All rights reserved.
-</div>
-
-<script>
-const form = document.getElementById('staffForm');
-const status = document.getElementById('status');
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const data = {
-    type: "Staff",
-    username: document.getElementById('username').value,
-    age: document.getElementById('age').value,
-    timezone: document.getElementById('timezone').value,
-    position: document.getElementById('position').value,
-    why: document.getElementById('why').value,
-    experience: document.getElementById('experience').value
-  };
-
-  status.textContent = "Sending...";
-  status.style.color = "white";
-
-  try {
-    const response = await fetch('/api/send', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-
-    if (response.ok) {
-      status.textContent = "ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ʜᴀs ʙᴇᴇɴ sᴇɴᴛ!";
-      status.style.color = "green";
-      form.reset();
-    } else {
-      throw new Error('Failed to send');
+  <script>
+    function toggleDropdown(id) {
+      const dropdowns = document.querySelectorAll('.dropdown');
+      dropdowns.forEach(drop => {
+        if (drop.id === id) {
+          drop.classList.toggle('active');
+        } else {
+          drop.classList.remove('active');
+        }
+      });
     }
-  } catch (err) {
-    status.textContent = "ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ʜᴀs ɴᴏᴛ ʙᴇᴇɴ sᴇɴᴛ.";
-    status.style.color = "red";
-  }
-});
-</script>
-
+  </script>
+  <div class="footer">
+    &copy; 2025 UncrustedBananas SMP. All rights reserved.
+  </div>
 </body>
 </html>
