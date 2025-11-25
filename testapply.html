@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Apply | W3eklyMC</title>
+  <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 2em;
+      background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)),
+                  url('server-icon.jpg') center center / cover no-repeat;
+      font-family: 'Minecraftia', sans-serif;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 { margin-bottom: 0.5em; }
+    .page-nav { display: flex; justify-content: center; gap: 1.5em; margin-bottom: 2em; flex-wrap: wrap; }
+    .page-nav a { background: #aa0000; color: white; padding: 0.6em 2.5em; border: 2px solid black;
+      text-decoration: none; font-family: 'Minecraftia', sans-serif; font-size: 0.9em;
+      box-shadow: inset -2px -3px #0006, inset 2px 2px #fff3; transition: background 0.3s, transform 0.2s;
+      min-width: 140px; text-align: center; }
+    .page-nav a:hover { background: #cc0000; transform: scale(1.05); }
+    form { background: rgba(0,0,0,0.65); border: 2px solid #222; padding: 2em; width: 100%; max-width: 500px;
+      box-shadow: 0 0 20px #000; display: flex; flex-direction: column; gap: 1.2em; }
+
+    label { font-size: 0.85em; }
+    input, textarea, select {
+      width: 100%; background: #222; color: white; font-family: 'Minecraftia', sans-serif;
+      border: 2px solid #000; padding: 0.5em; font-size: 0.8em;
+      box-shadow: inset -1px -2px #0005, inset 1px 1px #fff2; resize: vertical;
+    }
+    textarea { min-height: 100px; }
+
+    button {
+      background: #ffa500; color: white; font-family: 'Minecraftia', sans-serif;
+      font-size: 1em; padding: 0.6em 1.2em; border: 2px solid black; cursor: pointer;
+      box-shadow: inset -2px -3px #0006, inset 2px 2px #fff3;
+      transition: background 0.3s, transform 0.2s;
+      align-self: center; margin-top: 1em;
+    }
+    button:hover { background: #cc0000; transform: scale(1.05); }
+
+    .footer { margin-top: 2em; font-size: 0.8em; text-align: center; color: #aaa; }
+
+    /* MULTI-PAGE FORM */
+    .form-step { display: none; flex-direction: column; gap: 1em; }
+    .form-step.active { display: flex; }
+  </style>
+</head>
+<body>
+
+<h1>Apply for Staff</h1>
+
+<div class="page-nav">
+  <a href="mainpage.html">Home</a>
+  <a href="media.html">Media</a>
+  <a href="staff.html">Staff</a>
+  <a href="https://discord.gg/pMEfp5gQb2" target="_blank">Join</a>
+  <a href="vote.html">Vote</a>
+</div>
+
+<form id="staffForm">
+
+  <!-- PAGE 1 -->
+  <div class="form-step active">
+    <label>Minecraft Username:</label>
+    <input type="text" name="username" required>
+
+    <label>Age:</label>
+    <input type="number" name="age" min="13" required>
+
+    <label>Timezone:</label>
+    <input type="text" name="timezone" required>
+
+    <button type="button" class="next-btn">Next →</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="form-step">
+    <label>Position applying for:</label>
+    <select name="position" required>
+      <option value="">-- Select a role --</option>
+      <option value="builder">Builder</option>
+      <option value="helper">Helper</option>
+    </select>
+
+    <label>Why do you want to join the staff team?</label>
+    <textarea name="why" required></textarea>
+
+    <div style="display:flex; justify-content:space-between;">
+      <button type="button" class="back-btn">← Back</button>
+      <button type="button" class="next-btn">Next →</button>
+    </div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="form-step">
+    <label>Previous experience:</label>
+    <textarea name="experience"></textarea>
+
+    <label>Anything else we should know?</label>
+    <textarea name="extra"></textarea>
+
+    <div style="display:flex; justify-content:space-between;">
+      <button type="button" class="back-btn">← Back</button>
+      <button type="submit">Submit Application</button>
+    </div>
+
+    <p id="status" style="text-align:center;"></p>
+  </div>
+
+</form>
+
+<div class="footer">
+  &copy; 2025 W3eklyMC. All rights reserved.
+</div>
+
+<script>
+const steps = document.querySelectorAll(".form-step");
+let currentStep = 0;
+
+function showStep(n) {
+  steps.forEach((step, i) => step.classList.toggle("active", i === n));
+}
+
+document.querySelectorAll(".next-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentStep++;
+    showStep(currentStep);
+  });
+});
+
+document.querySelectorAll(".back-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentStep--;
+    showStep(currentStep);
+  });
+});
+
+const form = document.getElementById("staffForm");
+const status = document.getElementById("status");
+
+// Final submission
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const data = {
+    type: "Staff",
+    username: form.username.value,
+    age: form.age.value,
+    timezone: form.timezone.value,
+    position: form.position.value,
+    why: form.why.value,
+    experience: form.experience.value,
+    extra: form.extra.value
+  };
+
+  status.textContent = "Sending...";
+  status.style.color = "white";
+
+  try {
+    const response = await fetch('/api/send', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (response.ok) {
+      status.textContent = "ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ʜᴀs ʙᴇᴇɴ sᴇɴᴛ!";
+      status.style.color = "green";
+      form.reset();
+      currentStep = 0;
+      showStep(0);
+    } else {
+      throw new Error();
+    }
+  } catch {
+    status.textContent = "ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ʜᴀs ɴᴏᴛ ʙᴇᴇɴ sᴇɴᴛ.";
+    status.style.color = "red";
+  }
+});
+</script>
+
+</body>
+</html>
