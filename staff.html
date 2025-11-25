@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Apply | UncrustedBananas SMP</title>
+  <title>Apply | W3eklyMC</title>
   <link href="https://fonts.cdnfonts.com/css/minecraftia" rel="stylesheet">
   <style>
     body {
@@ -26,7 +26,7 @@
     label { font-size: 0.85em; }
     input, textarea, select { width: 100%; background: #222; color: white; font-family: 'Minecraftia', sans-serif; border: 2px solid #000; padding: 0.5em; font-size: 0.8em; box-shadow: inset -1px -2px #0005, inset 1px 1px #fff2; resize: vertical; }
     textarea { min-height: 100px; }
-    button { background: #aa0000; color: white; font-family: 'Minecraftia', sans-serif; font-size: 1em; padding: 0.6em 1.2em; border: 2px solid black; cursor: pointer; box-shadow: inset -2px -3px #0006, inset 2px 2px #fff3; transition: background 0.3s, transform 0.2s; align-self: center; margin-top: 1em; }
+    button { background: #ffa500; color: white; font-family: 'Minecraftia', sans-serif; font-size: 1em; padding: 0.6em 1.2em; border: 2px solid black; cursor: pointer; box-shadow: inset -2px -3px #0006, inset 2px 2px #fff3; transition: background 0.3s, transform 0.2s; align-self: center; margin-top: 1em; }
     button:hover { background: #cc0000; transform: scale(1.05); }
     .footer { margin-top: 2em; font-size: 0.8em; text-align: center; color: #aaa; }
   </style>
@@ -56,9 +56,8 @@
   <label for="position">Position applying for:</label>
   <select id="position" name="position" required>
     <option value="">-- Select a role --</option>
-    <option value="moderator">Moderator</option>
     <option value="builder">Builder</option>
-    <option value="lore writer">Helper</option>
+    <option value="helper">Helper</option>
   </select>
 
   <label for="why">Why do you want to join the staff team?</label>
@@ -72,7 +71,7 @@
 </form>
 
 <div class="footer">
-  &copy; 2025 UncrustedBananas SMP. All rights reserved.
+  &copy; 2025 W3eklyMC. All rights reserved.
 </div>
 
 <script>
@@ -103,14 +102,14 @@ form.addEventListener('submit', async (e) => {
     });
 
     if (response.ok) {
-      status.textContent = "Application sent successfully!";
+      status.textContent = "ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ʜᴀs ʙᴇᴇɴ sᴇɴᴛ!";
       status.style.color = "green";
       form.reset();
     } else {
       throw new Error('Failed to send');
     }
   } catch (err) {
-    status.textContent = "Error sending application. Try again.";
+    status.textContent = "ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ʜᴀs ɴᴏᴛ ʙᴇᴇɴ sᴇɴᴛ.";
     status.style.color = "red";
   }
 });
