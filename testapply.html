@@ -22,7 +22,6 @@
 
     h1 { margin-bottom: 0.6em; text-align:center; }
 
-    /* Nav Bar */
     .page-nav {
       display: flex;
       justify-content: center;
@@ -30,6 +29,7 @@
       margin-bottom: 2em;
       flex-wrap: wrap;
     }
+
     .page-nav a {
       background: #aa0000;
       color: white;
@@ -43,9 +43,9 @@
       min-width: 140px;
       text-align: center;
     }
+
     .page-nav a:hover { background: #cc0000; transform: scale(1.05); }
 
-    /* Form Container */
     form {
       background: rgba(0,0,0,0.65);
       border: 2px solid #222;
@@ -87,6 +87,7 @@
       align-self: center;
       margin-top: 1em;
     }
+
     button:hover { background: #cc0000; transform: scale(1.05); }
 
     .footer {
@@ -96,7 +97,6 @@
       color: #aaa;
     }
 
-    /* MULTI-STEP FORM PAGES */
     .form-step {
       display: none;
       flex-direction: column;
@@ -107,11 +107,11 @@
     }
   </style>
 </head>
+
 <body>
 
 <h1>Apply for Staff</h1>
 
-<!-- Navigation -->
 <div class="page-nav">
   <a href="mainpage.html">Home</a>
   <a href="media.html">Media</a>
@@ -120,7 +120,6 @@
   <a href="vote.html">Vote</a>
 </div>
 
-<!-- Multi-Step Form -->
 <form id="staffForm">
 
   <!-- STEP 1 -->
@@ -173,6 +172,7 @@
 
 </form>
 
+
 <div class="footer">
   © 2025 W3eklyMC. All rights reserved.
 </div>
@@ -187,26 +187,21 @@ function showStep(n) {
 
 document.querySelectorAll(".next-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    if (currentStep < steps.length - 1) {
-      currentStep++;
-      showStep(currentStep);
-    }
+    currentStep++;
+    showStep(currentStep);
   });
 });
 
 document.querySelectorAll(".back-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    if (currentStep > 0) {
-      currentStep--;
-      showStep(currentStep);
-    }
+    currentStep--;
+    showStep(currentStep);
   });
 });
 
 const form = document.getElementById("staffForm");
 const status = document.getElementById("status");
 
-// Final submit
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -225,21 +220,26 @@ form.addEventListener("submit", async (e) => {
   status.style.color = "white";
 
   try {
-    const response = await fetch('/api/send', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    const response = await fetch("/api/send", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data)
     });
 
     if (response.ok) {
       status.textContent = "ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ʜᴀs ʙᴇᴇɴ sᴇɴᴛ!";
       status.style.color = "green";
-      form.reset();
-      currentStep = 0;
-      showStep(0);
+
+      // DO NOT jump back immediately
+      setTimeout(() => {
+        form.reset();
+        currentStep = 0;  
+        showStep(currentStep);
+      }, 3000); // 3 sec delay
     } else {
       throw new Error();
     }
+
   } catch {
     status.textContent = "ᴀᴘᴘʟɪᴄᴀᴛɪᴏɴ ʜᴀs ɴᴏᴛ ʙᴇᴇɴ sᴇɴᴛ.";
     status.style.color = "red";
